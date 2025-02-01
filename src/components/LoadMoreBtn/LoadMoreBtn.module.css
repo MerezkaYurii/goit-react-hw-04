@@ -1,0 +1,14 @@
+.btn {
+  width: 150px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn:hover,
+.btn:focus {
+  background-color: aqua;
+  color: blue;
+}

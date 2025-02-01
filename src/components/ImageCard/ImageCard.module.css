@@ -1,0 +1,10 @@
+.wrapper {
+}
+.item {
+  list-style-type: none;
+}
+.img {
+  object-fit: cover;
+  width: 360px;
+  height: 200px;
+}
