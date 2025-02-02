@@ -8,13 +8,28 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import Loader from './components/Loader/Loader';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
+import ImageModal from './components/ImageModal/ImageModal';
 
 function App() {
+
+
   const [pictures, setPictures] = useState([]);
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const openModal = imageUrl => {
+    setSelectedImage(imageUrl);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedImage('');
+  };
 
   useEffect(() => {
     if (!query) return;
@@ -53,9 +68,22 @@ function App() {
       <SearchBar onSubmit={handleQuery} />
 
       {isLoading && <Loader />}
-
-      {pictures.length > 0 && <ImageGallery pictures={pictures} />}
+      {pictures.length > 0 && <ImageGallery pictures={pictures} onImageClick={openModal}  />}
       {pictures.length > 0 && <LoadMoreBtn onClick={countPage} />}
+      {isError && <ErrorMessage/>}
+    
+            <ImageModal
+        isOpen={modalIsOpen}
+        imageUrl={selectedImage}
+        onRequestClose={closeModal}
+      />
+    
+    
+    
+    
+    
+    
+    
     </>
   );
 }
